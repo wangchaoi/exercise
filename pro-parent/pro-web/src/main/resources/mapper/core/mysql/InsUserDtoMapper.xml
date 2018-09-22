@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinosoft.core.bean.dao.InsUserDtoMapper">
+  <resultMap id="BaseResultMap" type="com.sinosoft.core.bean.InsUserDto">
+    <id column="uid" jdbcType="INTEGER" property="UId" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="ultoken" jdbcType="VARCHAR" property="ultoken" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="invite_uid" jdbcType="INTEGER" property="inviteUid" />
+    <result column="isjoin" jdbcType="BIT" property="isjoin" />
+    <result column="login_salt" jdbcType="CHAR" property="loginSalt" />
+    <result column="uname" jdbcType="VARCHAR" property="uname" />
+    <result column="headerimg" jdbcType="VARCHAR" property="headerimg" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="sex" jdbcType="BIT" property="sex" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="is_audit" jdbcType="BIT" property="isAudit" />
+    <result column="is_active" jdbcType="BIT" property="isActive" />
+    <result column="is_init" jdbcType="BIT" property="isInit" />
+    <result column="ctime" jdbcType="INTEGER" property="ctime" />
+    <result column="identity" jdbcType="BIT" property="identity" />
+    <result column="api_key" jdbcType="VARCHAR" property="apiKey" />
+    <result column="domain" jdbcType="CHAR" property="domain" />
+    <result column="province" jdbcType="INTEGER" property="province" />
+    <result column="city" jdbcType="INTEGER" property="city" />
+    <result column="area" jdbcType="INTEGER" property="area" />
+    <result column="reg_ip" jdbcType="VARCHAR" property="regIp" />
+    <result column="lang" jdbcType="VARCHAR" property="lang" />
+    <result column="timezone" jdbcType="VARCHAR" property="timezone" />
+    <result column="is_del" jdbcType="TINYINT" property="isDel" />
+    <result column="first_letter" jdbcType="CHAR" property="firstLetter" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="last_login_time" jdbcType="INTEGER" property="lastLoginTime" />
+    <result column="last_feed_id" jdbcType="INTEGER" property="lastFeedId" />
+    <result column="last_post_time" jdbcType="INTEGER" property="lastPostTime" />
+    <result column="search_key" jdbcType="VARCHAR" property="searchKey" />
+    <result column="invite_code" jdbcType="VARCHAR" property="inviteCode" />
+    <result column="feed_email_time" jdbcType="INTEGER" property="feedEmailTime" />
+    <result column="send_email_time" jdbcType="INTEGER" property="sendEmailTime" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="input_city" jdbcType="VARCHAR" property="inputCity" />
+    <result column="is_fixed" jdbcType="BIT" property="isFixed" />
+    <result column="ts_uid" jdbcType="INTEGER" property="tsUid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    uid, company_id, phone, ultoken, password, invite_uid, isjoin, login_salt, uname, 
+    headerimg, email, sex, location, is_audit, is_active, is_init, ctime, identity, api_key, 
+    domain, province, city, area, reg_ip, lang, timezone, is_del, first_letter, intro, 
+    last_login_time, last_feed_id, last_post_time, search_key, invite_code, feed_email_time, 
+    send_email_time, openid, input_city, is_fixed, ts_uid
+  </sql>
+  <select id="selectByExample" parameterType="com.sinosoft.core.bean.InsUserDtoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ins_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ins_user
+    where uid = #{UId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ins_user
+    where uid = #{UId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sinosoft.core.bean.InsUserDtoExample">
+    delete from ins_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sinosoft.core.bean.InsUserDto">
+    insert into ins_user (uid, company_id, phone, 
+      ultoken, password, invite_uid, 
+      isjoin, login_salt, uname, 
+      headerimg, email, sex, 
+      location, is_audit, is_active, 
+      is_init, ctime, identity, api_key, 
+      domain, province, city, 
+      area, reg_ip, lang, 
+      timezone, is_del, first_letter, 
+      intro, last_login_time, last_feed_id, 
+      last_post_time, search_key, invite_code, 
+      feed_email_time, send_email_time, openid, 
+      input_city, is_fixed, ts_uid
+      )
+    values (#{UId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{ultoken,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{inviteUid,jdbcType=INTEGER}, 
+      #{isjoin,jdbcType=BIT}, #{loginSalt,jdbcType=CHAR}, #{uname,jdbcType=VARCHAR}, 
+      #{headerimg,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{sex,jdbcType=BIT}, 
+      #{location,jdbcType=VARCHAR}, #{isAudit,jdbcType=BIT}, #{isActive,jdbcType=BIT}, 
+      #{isInit,jdbcType=BIT}, #{ctime,jdbcType=INTEGER}, #{identity,jdbcType=BIT}, #{apiKey,jdbcType=VARCHAR}, 
+      #{domain,jdbcType=CHAR}, #{province,jdbcType=INTEGER}, #{city,jdbcType=INTEGER}, 
+      #{area,jdbcType=INTEGER}, #{regIp,jdbcType=VARCHAR}, #{lang,jdbcType=VARCHAR}, 
+      #{timezone,jdbcType=VARCHAR}, #{isDel,jdbcType=TINYINT}, #{firstLetter,jdbcType=CHAR}, 
+      #{intro,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=INTEGER}, #{lastFeedId,jdbcType=INTEGER}, 
+      #{lastPostTime,jdbcType=INTEGER}, #{searchKey,jdbcType=VARCHAR}, #{inviteCode,jdbcType=VARCHAR}, 
+      #{feedEmailTime,jdbcType=INTEGER}, #{sendEmailTime,jdbcType=INTEGER}, #{openid,jdbcType=VARCHAR}, 
+      #{inputCity,jdbcType=VARCHAR}, #{isFixed,jdbcType=BIT}, #{tsUid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinosoft.core.bean.InsUserDto">
+    insert into ins_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="UId != null">
+        uid,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="ultoken != null">
+        ultoken,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="inviteUid != null">
+        invite_uid,
+      </if>
+      <if test="isjoin != null">
+        isjoin,
+      </if>
+      <if test="loginSalt != null">
+        login_salt,
+      </if>
+      <if test="uname != null">
+        uname,
+      </if>
+      <if test="headerimg != null">
+        headerimg,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="location != null">
+        location,
+      </if>
+      <if test="isAudit != null">
+        is_audit,
+      </if>
+      <if test="isActive != null">
+        is_active,
+      </if>
+      <if test="isInit != null">
+        is_init,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="identity != null">
+        identity,
+      </if>
+      <if test="apiKey != null">
+        api_key,
+      </if>
+      <if test="domain != null">
+        domain,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="regIp != null">
+        reg_ip,
+      </if>
+      <if test="lang != null">
+        lang,
+      </if>
+      <if test="timezone != null">
+        timezone,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="firstLetter != null">
+        first_letter,
+      </if>
+      <if test="intro != null">
+        intro,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="lastFeedId != null">
+        last_feed_id,
+      </if>
+      <if test="lastPostTime != null">
+        last_post_time,
+      </if>
+      <if test="searchKey != null">
+        search_key,
+      </if>
+      <if test="inviteCode != null">
+        invite_code,
+      </if>
+      <if test="feedEmailTime != null">
+        feed_email_time,
+      </if>
+      <if test="sendEmailTime != null">
+        send_email_time,
+      </if>
+      <if test="openid != null">
+        openid,
+      </if>
+      <if test="inputCity != null">
+        input_city,
+      </if>
+      <if test="isFixed != null">
+        is_fixed,
+      </if>
+      <if test="tsUid != null">
+        ts_uid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="UId != null">
+        #{UId,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="ultoken != null">
+        #{ultoken,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteUid != null">
+        #{inviteUid,jdbcType=INTEGER},
+      </if>
+      <if test="isjoin != null">
+        #{isjoin,jdbcType=BIT},
+      </if>
+      <if test="loginSalt != null">
+        #{loginSalt,jdbcType=CHAR},
+      </if>
+      <if test="uname != null">
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="headerimg != null">
+        #{headerimg,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=BIT},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="isAudit != null">
+        #{isAudit,jdbcType=BIT},
+      </if>
+      <if test="isActive != null">
+        #{isActive,jdbcType=BIT},
+      </if>
+      <if test="isInit != null">
+        #{isInit,jdbcType=BIT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=INTEGER},
+      </if>
+      <if test="identity != null">
+        #{identity,jdbcType=BIT},
+      </if>
+      <if test="apiKey != null">
+        #{apiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="domain != null">
+        #{domain,jdbcType=CHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=INTEGER},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=INTEGER},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=INTEGER},
+      </if>
+      <if test="regIp != null">
+        #{regIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lang != null">
+        #{lang,jdbcType=VARCHAR},
+      </if>
+      <if test="timezone != null">
+        #{timezone,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=TINYINT},
+      </if>
+      <if test="firstLetter != null">
+        #{firstLetter,jdbcType=CHAR},
+      </if>
+      <if test="intro != null">
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=INTEGER},
+      </if>
+      <if test="lastFeedId != null">
+        #{lastFeedId,jdbcType=INTEGER},
+      </if>
+      <if test="lastPostTime != null">
+        #{lastPostTime,jdbcType=INTEGER},
+      </if>
+      <if test="searchKey != null">
+        #{searchKey,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteCode != null">
+        #{inviteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="feedEmailTime != null">
+        #{feedEmailTime,jdbcType=INTEGER},
+      </if>
+      <if test="sendEmailTime != null">
+        #{sendEmailTime,jdbcType=INTEGER},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCity != null">
+        #{inputCity,jdbcType=VARCHAR},
+      </if>
+      <if test="isFixed != null">
+        #{isFixed,jdbcType=BIT},
+      </if>
+      <if test="tsUid != null">
+        #{tsUid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sinosoft.core.bean.InsUserDtoExample" resultType="java.lang.Long">
+    select count(*) from ins_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ins_user
+    <set>
+      <if test="record.UId != null">
+        uid = #{record.UId,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyId != null">
+        company_id = #{record.companyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ultoken != null">
+        ultoken = #{record.ultoken,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inviteUid != null">
+        invite_uid = #{record.inviteUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isjoin != null">
+        isjoin = #{record.isjoin,jdbcType=BIT},
+      </if>
+      <if test="record.loginSalt != null">
+        login_salt = #{record.loginSalt,jdbcType=CHAR},
+      </if>
+      <if test="record.uname != null">
+        uname = #{record.uname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headerimg != null">
+        headerimg = #{record.headerimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=BIT},
+      </if>
+      <if test="record.location != null">
+        location = #{record.location,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAudit != null">
+        is_audit = #{record.isAudit,jdbcType=BIT},
+      </if>
+      <if test="record.isActive != null">
+        is_active = #{record.isActive,jdbcType=BIT},
+      </if>
+      <if test="record.isInit != null">
+        is_init = #{record.isInit,jdbcType=BIT},
+      </if>
+      <if test="record.ctime != null">
+        ctime = #{record.ctime,jdbcType=INTEGER},
+      </if>
+      <if test="record.identity != null">
+        identity = #{record.identity,jdbcType=BIT},
+      </if>
+      <if test="record.apiKey != null">
+        api_key = #{record.apiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.domain != null">
+        domain = #{record.domain,jdbcType=CHAR},
+      </if>
+      <if test="record.province != null">
+        province = #{record.province,jdbcType=INTEGER},
+      </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=INTEGER},
+      </if>
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=INTEGER},
+      </if>
+      <if test="record.regIp != null">
+        reg_ip = #{record.regIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lang != null">
+        lang = #{record.lang,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timezone != null">
+        timezone = #{record.timezone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDel != null">
+        is_del = #{record.isDel,jdbcType=TINYINT},
+      </if>
+      <if test="record.firstLetter != null">
+        first_letter = #{record.firstLetter,jdbcType=CHAR},
+      </if>
+      <if test="record.intro != null">
+        intro = #{record.intro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLoginTime != null">
+        last_login_time = #{record.lastLoginTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastFeedId != null">
+        last_feed_id = #{record.lastFeedId,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastPostTime != null">
+        last_post_time = #{record.lastPostTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.searchKey != null">
+        search_key = #{record.searchKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inviteCode != null">
+        invite_code = #{record.inviteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedEmailTime != null">
+        feed_email_time = #{record.feedEmailTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.sendEmailTime != null">
+        send_email_time = #{record.sendEmailTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.openid != null">
+        openid = #{record.openid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputCity != null">
+        input_city = #{record.inputCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isFixed != null">
+        is_fixed = #{record.isFixed,jdbcType=BIT},
+      </if>
+      <if test="record.tsUid != null">
+        ts_uid = #{record.tsUid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ins_user
+    set uid = #{record.UId,jdbcType=INTEGER},
+      company_id = #{record.companyId,jdbcType=INTEGER},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      ultoken = #{record.ultoken,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      invite_uid = #{record.inviteUid,jdbcType=INTEGER},
+      isjoin = #{record.isjoin,jdbcType=BIT},
+      login_salt = #{record.loginSalt,jdbcType=CHAR},
+      uname = #{record.uname,jdbcType=VARCHAR},
+      headerimg = #{record.headerimg,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=BIT},
+      location = #{record.location,jdbcType=VARCHAR},
+      is_audit = #{record.isAudit,jdbcType=BIT},
+      is_active = #{record.isActive,jdbcType=BIT},
+      is_init = #{record.isInit,jdbcType=BIT},
+      ctime = #{record.ctime,jdbcType=INTEGER},
+      identity = #{record.identity,jdbcType=BIT},
+      api_key = #{record.apiKey,jdbcType=VARCHAR},
+      domain = #{record.domain,jdbcType=CHAR},
+      province = #{record.province,jdbcType=INTEGER},
+      city = #{record.city,jdbcType=INTEGER},
+      area = #{record.area,jdbcType=INTEGER},
+      reg_ip = #{record.regIp,jdbcType=VARCHAR},
+      lang = #{record.lang,jdbcType=VARCHAR},
+      timezone = #{record.timezone,jdbcType=VARCHAR},
+      is_del = #{record.isDel,jdbcType=TINYINT},
+      first_letter = #{record.firstLetter,jdbcType=CHAR},
+      intro = #{record.intro,jdbcType=VARCHAR},
+      last_login_time = #{record.lastLoginTime,jdbcType=INTEGER},
+      last_feed_id = #{record.lastFeedId,jdbcType=INTEGER},
+      last_post_time = #{record.lastPostTime,jdbcType=INTEGER},
+      search_key = #{record.searchKey,jdbcType=VARCHAR},
+      invite_code = #{record.inviteCode,jdbcType=VARCHAR},
+      feed_email_time = #{record.feedEmailTime,jdbcType=INTEGER},
+      send_email_time = #{record.sendEmailTime,jdbcType=INTEGER},
+      openid = #{record.openid,jdbcType=VARCHAR},
+      input_city = #{record.inputCity,jdbcType=VARCHAR},
+      is_fixed = #{record.isFixed,jdbcType=BIT},
+      ts_uid = #{record.tsUid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinosoft.core.bean.InsUserDto">
+    update ins_user
+    <set>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="ultoken != null">
+        ultoken = #{ultoken,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteUid != null">
+        invite_uid = #{inviteUid,jdbcType=INTEGER},
+      </if>
+      <if test="isjoin != null">
+        isjoin = #{isjoin,jdbcType=BIT},
+      </if>
+      <if test="loginSalt != null">
+        login_salt = #{loginSalt,jdbcType=CHAR},
+      </if>
+      <if test="uname != null">
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="headerimg != null">
+        headerimg = #{headerimg,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=BIT},
+      </if>
+      <if test="location != null">
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="isAudit != null">
+        is_audit = #{isAudit,jdbcType=BIT},
+      </if>
+      <if test="isActive != null">
+        is_active = #{isActive,jdbcType=BIT},
+      </if>
+      <if test="isInit != null">
+        is_init = #{isInit,jdbcType=BIT},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=INTEGER},
+      </if>
+      <if test="identity != null">
+        identity = #{identity,jdbcType=BIT},
+      </if>
+      <if test="apiKey != null">
+        api_key = #{apiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="domain != null">
+        domain = #{domain,jdbcType=CHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=INTEGER},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=INTEGER},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=INTEGER},
+      </if>
+      <if test="regIp != null">
+        reg_ip = #{regIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lang != null">
+        lang = #{lang,jdbcType=VARCHAR},
+      </if>
+      <if test="timezone != null">
+        timezone = #{timezone,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=TINYINT},
+      </if>
+      <if test="firstLetter != null">
+        first_letter = #{firstLetter,jdbcType=CHAR},
+      </if>
+      <if test="intro != null">
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=INTEGER},
+      </if>
+      <if test="lastFeedId != null">
+        last_feed_id = #{lastFeedId,jdbcType=INTEGER},
+      </if>
+      <if test="lastPostTime != null">
+        last_post_time = #{lastPostTime,jdbcType=INTEGER},
+      </if>
+      <if test="searchKey != null">
+        search_key = #{searchKey,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteCode != null">
+        invite_code = #{inviteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="feedEmailTime != null">
+        feed_email_time = #{feedEmailTime,jdbcType=INTEGER},
+      </if>
+      <if test="sendEmailTime != null">
+        send_email_time = #{sendEmailTime,jdbcType=INTEGER},
+      </if>
+      <if test="openid != null">
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCity != null">
+        input_city = #{inputCity,jdbcType=VARCHAR},
+      </if>
+      <if test="isFixed != null">
+        is_fixed = #{isFixed,jdbcType=BIT},
+      </if>
+      <if test="tsUid != null">
+        ts_uid = #{tsUid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where uid = #{UId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinosoft.core.bean.InsUserDto">
+    update ins_user
+    set company_id = #{companyId,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      ultoken = #{ultoken,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      invite_uid = #{inviteUid,jdbcType=INTEGER},
+      isjoin = #{isjoin,jdbcType=BIT},
+      login_salt = #{loginSalt,jdbcType=CHAR},
+      uname = #{uname,jdbcType=VARCHAR},
+      headerimg = #{headerimg,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=BIT},
+      location = #{location,jdbcType=VARCHAR},
+      is_audit = #{isAudit,jdbcType=BIT},
+      is_active = #{isActive,jdbcType=BIT},
+      is_init = #{isInit,jdbcType=BIT},
+      ctime = #{ctime,jdbcType=INTEGER},
+      identity = #{identity,jdbcType=BIT},
+      api_key = #{apiKey,jdbcType=VARCHAR},
+      domain = #{domain,jdbcType=CHAR},
+      province = #{province,jdbcType=INTEGER},
+      city = #{city,jdbcType=INTEGER},
+      area = #{area,jdbcType=INTEGER},
+      reg_ip = #{regIp,jdbcType=VARCHAR},
+      lang = #{lang,jdbcType=VARCHAR},
+      timezone = #{timezone,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=TINYINT},
+      first_letter = #{firstLetter,jdbcType=CHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      last_login_time = #{lastLoginTime,jdbcType=INTEGER},
+      last_feed_id = #{lastFeedId,jdbcType=INTEGER},
+      last_post_time = #{lastPostTime,jdbcType=INTEGER},
+      search_key = #{searchKey,jdbcType=VARCHAR},
+      invite_code = #{inviteCode,jdbcType=VARCHAR},
+      feed_email_time = #{feedEmailTime,jdbcType=INTEGER},
+      send_email_time = #{sendEmailTime,jdbcType=INTEGER},
+      openid = #{openid,jdbcType=VARCHAR},
+      input_city = #{inputCity,jdbcType=VARCHAR},
+      is_fixed = #{isFixed,jdbcType=BIT},
+      ts_uid = #{tsUid,jdbcType=INTEGER}
+    where uid = #{UId,jdbcType=INTEGER}
+  </update>
+</mapper>
